@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ports\incoming\" />
     <Folder Include="ports\outgoing\" />
   </ItemGroup>
 
