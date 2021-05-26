@@ -1,3 +1,9 @@
+using AutoMapper;
+using expense.Application.ports.incoming;
+using expense.Application.ports.outgoing;
+using expense.Application.services;
+using expense.Domain.Entities;
+using expense.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +31,15 @@ namespace expense.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Expense, ExpenseEntity>();
+            });
+            IMapper mapper = configuration.CreateMapper();
+            services.AddPersistenceDependencies(Configuration);
+            services.AddSingleton(mapper);
+            services.AddScoped<ICreateExpense, CreateExpenseService>();
+            services.AddScoped<IAddExpense, ExpenseRepository>();
             services.AddControllers();
         }
 
@@ -35,13 +50,9 @@ namespace expense.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
