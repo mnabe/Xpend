@@ -24,7 +24,6 @@ namespace ExpenseTests.Domain
             //Assert
             Assert.True(true);
         }
-
         //[Fact]
         //public void CreatesExpense()
 
