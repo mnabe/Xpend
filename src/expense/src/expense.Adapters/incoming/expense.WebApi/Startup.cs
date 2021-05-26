@@ -40,6 +40,7 @@ namespace expense.WebApi
             services.AddSingleton(mapper);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
             services.AddScoped<IAddExpense, ExpenseRepository>();
+            services.AddSwaggerGen();
             services.AddControllers();
         }
 
@@ -53,6 +54,11 @@ namespace expense.WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+           {
+               c.SwaggerEndpoint("/swagger/v1/swagger.json", "Xpend API v1");
+           });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
