@@ -22,8 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\expense.Adapters\incoming\expense.WebApi\expense.WebApi.csproj" />
     <ProjectReference Include="..\..\src\expense.Application\expense.Application.csproj" />
     <ProjectReference Include="..\..\src\expense.Domain\expense.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Adapters\outgoing\" />
   </ItemGroup>
 
 </Project>
