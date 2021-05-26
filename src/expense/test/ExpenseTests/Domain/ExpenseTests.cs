@@ -10,9 +10,6 @@ namespace ExpenseTests.Domain
 {
     public class ExpenseTests
     {
-        //[Fact]
-        //public void CreatesExpense()
-
         [Fact]
         public void UpdatesExpense()
         {
@@ -27,6 +24,9 @@ namespace ExpenseTests.Domain
             //Assert
             Assert.True(true);
         }
+
+        //[Fact]
+        //public void CreatesExpense()
 
         //[Fact]
         //EnsureEnumIsDisplayedAsNormalStringAndNotUpperCase
