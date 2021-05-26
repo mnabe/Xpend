@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expense.Domain", "src\expen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTests", "src\expense\test\ExpenseTests\ExpenseTests.csproj", "{918571DE-ADEA-44C6-AF0C-B3AF761419EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "expense.Application", "src\expense\src\expense.Application\expense.Application.csproj", "{C7008358-EE49-40DF-A671-A2960A64DC05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{918571DE-ADEA-44C6-AF0C-B3AF761419EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{918571DE-ADEA-44C6-AF0C-B3AF761419EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{918571DE-ADEA-44C6-AF0C-B3AF761419EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7008358-EE49-40DF-A671-A2960A64DC05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7008358-EE49-40DF-A671-A2960A64DC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7008358-EE49-40DF-A671-A2960A64DC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7008358-EE49-40DF-A671-A2960A64DC05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{5F44D61F-225F-463A-8DB4-AE6DB7CEDD8B} = {6AC78539-EADC-4694-A1C7-6280152AF4BB}
 		{5546FAA0-0AB2-4711-BF46-AFA92CEF3241} = {6AC78539-EADC-4694-A1C7-6280152AF4BB}
 		{918571DE-ADEA-44C6-AF0C-B3AF761419EC} = {F276EB9B-D8A4-4A3A-B80B-7C0544C467BD}
+		{C7008358-EE49-40DF-A671-A2960A64DC05} = {6AC78539-EADC-4694-A1C7-6280152AF4BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E1D201F6-AB58-4A25-B735-6006F6AF74DD}
