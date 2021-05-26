@@ -7,7 +7,7 @@ using System.Text;
 
 namespace expense.Application.services
 {
-    class CreateExpenseService : ICreateExpense
+    public class CreateExpenseService : ICreateExpense
     {
         private readonly IAddExpense _addExpense;
         public CreateExpenseService(IAddExpense addExpense)
