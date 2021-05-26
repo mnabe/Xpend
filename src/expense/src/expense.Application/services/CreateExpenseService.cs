@@ -17,7 +17,7 @@ namespace expense.Application.services
         public bool CreateExpense(CreateExpenseCommand command)
         {
             ExpenseCategory expenseCategory = checkValidCategoryEnum(command.ExpenseCategory);
-            _addExpense.Add(command.ExpenseCategory, command.ExpenseCost);
+            _addExpense.Add(expenseCategory, command.ExpenseCost);
             return true;
         }
 
