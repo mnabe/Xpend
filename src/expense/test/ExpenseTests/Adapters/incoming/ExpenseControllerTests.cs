@@ -1,6 +1,8 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using expense.WebApi.Controllers;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -21,10 +23,12 @@ namespace ExpenseTests.Adapters.incoming
             decimal expenseCost = 700;
 
             //Act
-            HttpStatusCode result = (HttpStatusCode)expenseController.CreateExpense(expenseCategory, expenseCost).StatusCode.Value;
+
+            var result = expenseController.CreateExpense(expenseCategory, expenseCost);
 
             //Assert
-            Assert.True(HttpStatusCode.OK.Equals(result));
+            result.Should().BeOfType<OkObjectResult>()
+                .Which.StatusCode.Should().Be((int)HttpStatusCode.Created);
         }
 
         //[Fact]
