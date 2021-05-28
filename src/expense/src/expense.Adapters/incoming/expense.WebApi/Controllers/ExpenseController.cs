@@ -18,10 +18,10 @@ namespace expense.WebApi.Controllers
             _createExpense = createExpense;
         }
         [HttpPost]
-        public ObjectResult CreateExpense(string expenseCategory, decimal expenseCost)
+        public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
-            return Ok(command);
+            return Ok(command); //should be changed to CreatedAtAction
         }
     }
 }
