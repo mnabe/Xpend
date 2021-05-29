@@ -18,6 +18,25 @@ namespace ExpenseTests.Adapters.outgoing
         }
 
         [Fact]
+        public void GetExpensesFromDb_Success()
+        {
+            //Arrange
+            Fixture fixture = new Fixture();
+            ExpenseEntity expenseOne = fixture.Create<ExpenseEntity>();
+            ExpenseEntity expenseTwo = fixture.Create<ExpenseEntity>();
+            _DbFixture.ExpenseDataContext.Expenses.Add(expenseOne);
+            _DbFixture.ExpenseDataContext.Expenses.Add(expenseTwo);
+            _DbFixture.ExpenseDataContext.SaveChanges();
+
+            //Act
+            IEnumerable<ExpenseEntity> expenses = _DbFixture.ExpenseDataContext.Expenses.AsEnumerable();
+
+            //Assert
+            Assert.Equal(2, expenses.Count());
+
+        }
+
+        [Fact]
         public void ExpenseAddedToDb_Success()
         {
             //Arrange
