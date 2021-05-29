@@ -5,10 +5,11 @@ using expense.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace expense.Persistence
 {
-    public class ExpenseRepository: IAddExpense
+    public class ExpenseRepository: IAddExpense, IFindExpenses
     {
         private readonly IMapper _mapper;
         private readonly ExpenseDataContext _context;
@@ -28,6 +29,13 @@ namespace expense.Persistence
             _context.Expenses.Add(entity);
             _context.SaveChanges();
             return expense;
+        }
+
+        public List<Expense> Find()
+        {
+            var response = _context.Expenses.AsEnumerable();
+            List<Expense> expenses = _mapper.Map<List<Expense>>(response);
+            return expenses;
         }
     }
 }
