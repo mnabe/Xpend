@@ -16,7 +16,23 @@ namespace ExpenseTests.Adapters.outgoing
         {
             _DbFixture = dbFixture;
         }
+        [Fact]
+        public void GetExpenseFromDb_Success()
+        {
+            //Arrange
+            Fixture fixture = new Fixture();
+            fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
+            ExpenseEntity expense = fixture.Create<ExpenseEntity>();
+            _DbFixture.ExpenseDataContext.Expenses.Add(expense);
+            _DbFixture.ExpenseDataContext.SaveChanges();
 
+            //Act
+            ExpenseEntity entity = _DbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
+
+            //Assert
+            Assert.NotNull(entity);
+            Assert.Equal(1, entity.ExpenseId);
+        }
         [Fact]
         public void GetExpensesFromDb_Success()
         {
@@ -33,7 +49,6 @@ namespace ExpenseTests.Adapters.outgoing
 
             //Assert
             Assert.Equal(2, expenses.Count());
-
         }
 
         [Fact]
