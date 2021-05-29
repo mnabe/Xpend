@@ -14,10 +14,19 @@ namespace expense.WebApi.Controllers
     {
         private readonly ICreateExpense _createExpense;
         private readonly IGetExpenses _getExpenses;
-        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses)
+        private readonly IGetExpense _getExpense;
+        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses, IGetExpense getExpense)
         {
             _createExpense = createExpense;
             _getExpenses = getExpenses;
+            _getExpense = getExpense;
+        }
+
+        [HttpGet("id")]
+        public ActionResult GetExpense(int id)
+        {
+            var response = _getExpense.GetExpense(id);
+            return Ok(response);
         }
 
         [HttpGet]
