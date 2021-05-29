@@ -13,10 +13,20 @@ namespace expense.WebApi.Controllers
     public class ExpenseController : ControllerBase
     {
         private readonly ICreateExpense _createExpense;
-        public ExpenseController(ICreateExpense createExpense)
+        private readonly IGetExpenses _getExpenses;
+        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses)
         {
             _createExpense = createExpense;
+            _getExpenses = getExpenses;
         }
+
+        [HttpGet]
+        public ActionResult GetExpenses()
+        {
+            var response = _getExpenses.GetExpenses();
+            return Ok(response);
+        }
+ 
         [HttpPost]
         public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
