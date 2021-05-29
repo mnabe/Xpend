@@ -1,5 +1,6 @@
 ﻿using expense.Application.ports.incoming;
 using expense.Application.ports.outgoing;
+using expense.Application.services.Shared;
 using expense.Domain.Entities;
 using expense.Domain.Enums;
 using System;
@@ -17,15 +18,10 @@ namespace expense.Application.services
         }
         public Expense EditExpense(EditExpenseCommand command)
         {
-            ExpenseCategory expenseCategory = checkValidCategoryEnum(command.ExpenseCategory);
+            ExpenseCategoryService expenseCategoryService = new ExpenseCategoryService();
+            ExpenseCategory expenseCategory = expenseCategoryService.checkValidCategoryEnum(command.ExpenseCategory);
             var response = _updateExpense.UpdateExpense(command.ExpenseId, expenseCategory, command.ExpenseCost);
             return response;
-        }
-
-        private ExpenseCategory checkValidCategoryEnum(string expenseCategoryString)
-        {
-            ExpenseCategory expenseCategory = (ExpenseCategory)Enum.Parse(typeof(ExpenseCategory), expenseCategoryString);
-            return expenseCategory;
         }
     }
 }
