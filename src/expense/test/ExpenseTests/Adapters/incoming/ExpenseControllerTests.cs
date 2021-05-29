@@ -14,6 +14,20 @@ namespace ExpenseTests.Adapters.incoming
     public class ExpenseControllerTests
     {
         [Fact]
+        public void GetExpense_Success()
+        {
+            //Arrrange
+            var fixture = new Fixture().Customize(new AutoMoqCustomization());
+            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+
+            //Act
+            var result = expenseController.GetExpense(1);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>()
+                .Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
+        }
+        [Fact]
         public void GetExpenses_Success()
         {
             //Arrange
