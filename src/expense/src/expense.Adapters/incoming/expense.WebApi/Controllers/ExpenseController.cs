@@ -15,11 +15,13 @@ namespace expense.WebApi.Controllers
         private readonly ICreateExpense _createExpense;
         private readonly IGetExpenses _getExpenses;
         private readonly IGetExpense _getExpense;
-        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses, IGetExpense getExpense)
+        private readonly IEditExpense _editExpense;
+        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses, IGetExpense getExpense, IEditExpense editExpense)
         {
             _createExpense = createExpense;
             _getExpenses = getExpenses;
             _getExpense = getExpense;
+            _editExpense = editExpense;
         }
 
         [HttpGet("id")]
@@ -42,6 +44,14 @@ namespace expense.WebApi.Controllers
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
             _createExpense.CreateExpense(command);
             return Ok(command); //should be changed to CreatedAtAction
+        }
+
+        [HttpPut]
+        public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
+        {
+            EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
+            var response = _editExpense.EditExpense(command);
+            return Ok(response);
         }
     }
 }
