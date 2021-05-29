@@ -34,12 +34,15 @@ namespace expense.WebApi
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Expense, ExpenseEntity>();
+                cfg.CreateMap<ExpenseEntity, Expense>();
             });
             IMapper mapper = configuration.CreateMapper();
             services.AddPersistenceDependencies(Configuration);
-            services.AddSingleton(mapper);
+            services.AddSingleton(mapper); services.AddScoped<ICreateExpense, CreateExpenseService>();
             services.AddScoped<ICreateExpense, CreateExpenseService>();
             services.AddScoped<IAddExpense, ExpenseRepository>();
+            services.AddScoped<IGetExpenses, GetExpensesService>();
+            services.AddScoped<IFindExpenses, ExpenseRepository>();
             services.AddSwaggerGen();
             services.AddControllers();
         }
