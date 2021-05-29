@@ -43,6 +43,8 @@ namespace expense.WebApi
             services.AddScoped<IAddExpense, ExpenseRepository>();
             services.AddScoped<IGetExpenses, GetExpensesService>();
             services.AddScoped<IFindExpenses, ExpenseRepository>();
+            services.AddScoped<IGetExpense, GetExpenseService>();
+            services.AddScoped<IFindExpense, ExpenseRepository>();
             services.AddSwaggerGen();
             services.AddControllers();
         }
