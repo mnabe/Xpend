@@ -21,6 +21,7 @@ namespace expense.WebApi.Controllers
         public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
+            _createExpense.CreateExpense(command);
             return Ok(command); //should be changed to CreatedAtAction
         }
     }
