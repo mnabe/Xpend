@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace expense.Persistence
 {
-    public class ExpenseRepository: IAddExpense, IFindExpenses, IFindExpense
+    public class ExpenseRepository: IAddExpense, IFindExpenses, IFindExpense, IUpdateExpense
     {
         private readonly IMapper _mapper;
         private readonly ExpenseDataContext _context;
@@ -40,6 +40,17 @@ namespace expense.Persistence
             _context.Expenses.Add(entity);
             _context.SaveChanges();
             return expense;
+        }
+
+        public Expense UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
+        {
+            var expenseEntity = _context.Expenses.Find(id);
+            expenseEntity.ExpenseCategory = expenseCategory;
+            expenseEntity.ExpenseCost = expenseCost;
+            _context.SaveChanges();
+            Expense expense = _mapper.Map<Expense>(expenseEntity);
+            return expense;
+
         }
     }
 }
