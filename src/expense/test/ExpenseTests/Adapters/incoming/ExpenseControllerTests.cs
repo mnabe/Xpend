@@ -60,6 +60,25 @@ namespace ExpenseTests.Adapters.incoming
                 .Which.StatusCode.Should().Be((int)HttpStatusCode.Created);
         }
 
+        [Fact]
+        public void EditExpense_Succes()
+        {
+            //Arrange
+            var fixture = new Fixture().Customize(new AutoMoqCustomization());
+            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            int expenseId = 1;
+            string expenseCategory = "HOTEL";
+            decimal expenseCost = 700;
+
+            //Act
+            var result = expenseController.EditExpense(expenseId, expenseCategory, expenseCost);
+
+            //Assert
+            result.Should().BeOfType<OkObjectResult>()
+                .Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
+        }
+
+
         //[Fact]
         //public void CreateExpense_ThrowsException()
     }
