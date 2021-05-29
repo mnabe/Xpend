@@ -65,5 +65,25 @@ namespace ExpenseTests.Adapters.outgoing
             //Assert
             Assert.Equal(1, _DbFixture.ExpenseDataContext.Expenses.Count());
         }
+
+        [Fact]
+        public void ExpenseUpdated_Success()
+        {
+            //Arrange
+            Fixture fixture = new Fixture();
+            fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
+            ExpenseEntity expense = fixture.Create<ExpenseEntity>();
+            _DbFixture.ExpenseDataContext.Expenses.Add(expense);
+            _DbFixture.ExpenseDataContext.SaveChanges();
+
+            //Act
+            //Act
+            ExpenseEntity entity = _DbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
+            entity.ExpenseCost = 200;
+            _DbFixture.ExpenseDataContext.SaveChanges();
+
+            //Assert
+            Assert.Equal(200, _DbFixture.ExpenseDataContext.Expenses.FirstOrDefault().ExpenseCost);
+        }
     }
 }
