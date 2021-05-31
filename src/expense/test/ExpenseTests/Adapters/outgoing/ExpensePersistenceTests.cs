@@ -11,18 +11,15 @@ namespace ExpenseTests.Adapters.outgoing
 {
     public class ExpensePersistenceTests: IClassFixture<DbFixture>
     {
-        DbFixture _DbFixture;
-        public ExpensePersistenceTests(DbFixture dbFixture)
-        {
-            _DbFixture = dbFixture;
-        }
         [Fact]
         public void GetExpenseFromDb_Success()
         {
+            //Setup
+            DbFixture _DbFixture = new DbFixture();
+
             //Arrange
-            Fixture fixture = new Fixture();
-            fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
-            ExpenseEntity expense = fixture.Create<ExpenseEntity>();
+            _DbFixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
+            ExpenseEntity expense = _DbFixture.Fixture.Create<ExpenseEntity>();
             _DbFixture.ExpenseDataContext.Expenses.Add(expense);
             _DbFixture.ExpenseDataContext.SaveChanges();
 
@@ -36,10 +33,14 @@ namespace ExpenseTests.Adapters.outgoing
         [Fact]
         public void GetExpensesFromDb_Success()
         {
+            //Setup
+            DbFixture _DbFixture = new DbFixture();
+
             //Arrange
-            Fixture fixture = new Fixture();
-            ExpenseEntity expenseOne = fixture.Create<ExpenseEntity>();
-            ExpenseEntity expenseTwo = fixture.Create<ExpenseEntity>();
+            _DbFixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 2));
+            ExpenseEntity expenseOne = _DbFixture.Fixture.Create<ExpenseEntity>();
+            _DbFixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 3));
+            ExpenseEntity expenseTwo = _DbFixture.Fixture.Create<ExpenseEntity>();
             _DbFixture.ExpenseDataContext.Expenses.Add(expenseOne);
             _DbFixture.ExpenseDataContext.Expenses.Add(expenseTwo);
             _DbFixture.ExpenseDataContext.SaveChanges();
@@ -49,14 +50,18 @@ namespace ExpenseTests.Adapters.outgoing
 
             //Assert
             Assert.Equal(2, expenses.Count());
+            _DbFixture.ExpenseDataContext.ChangeTracker.Clear();
         }
 
         [Fact]
         public void ExpenseAddedToDb_Success()
         {
+            //Setup
+            DbFixture _DbFixture = new DbFixture();
+
             //Arrange
-            Fixture fixture = new Fixture();
-            ExpenseEntity expense = fixture.Create<ExpenseEntity>();
+            _DbFixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 4));
+            ExpenseEntity expense = _DbFixture.Fixture.Create<ExpenseEntity>();
 
             //Act
             _DbFixture.ExpenseDataContext.Expenses.Add(expense);
@@ -64,26 +69,29 @@ namespace ExpenseTests.Adapters.outgoing
 
             //Assert
             Assert.Equal(1, _DbFixture.ExpenseDataContext.Expenses.Count());
+            _DbFixture.ExpenseDataContext.ChangeTracker.Clear();
         }
 
         [Fact]
         public void ExpenseUpdated_Success()
         {
+            //Setup
+            DbFixture _DbFixture = new DbFixture();
+
             //Arrange
-            Fixture fixture = new Fixture();
-            fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
-            ExpenseEntity expense = fixture.Create<ExpenseEntity>();
+            _DbFixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 5));
+            ExpenseEntity expense = _DbFixture.Fixture.Create<ExpenseEntity>();
             _DbFixture.ExpenseDataContext.Expenses.Add(expense);
             _DbFixture.ExpenseDataContext.SaveChanges();
 
             //Act
-            //Act
-            ExpenseEntity entity = _DbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
+            ExpenseEntity entity = _DbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 5).FirstOrDefault();
             entity.ExpenseCost = 200;
             _DbFixture.ExpenseDataContext.SaveChanges();
 
             //Assert
             Assert.Equal(200, _DbFixture.ExpenseDataContext.Expenses.FirstOrDefault().ExpenseCost);
+            _DbFixture.ExpenseDataContext.ChangeTracker.Clear();
         }
     }
 }
