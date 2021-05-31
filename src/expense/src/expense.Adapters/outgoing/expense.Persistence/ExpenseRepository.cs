@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace expense.Persistence
 {
-    public class ExpenseRepository: IAddExpense, IFindExpenses, IFindExpense, IUpdateExpense
+    internal class ExpenseRepository: IAddExpense, IFindExpenses, IFindExpense, IUpdateExpense
     {
         private readonly IMapper _mapper;
         private readonly ExpenseDataContext _context;

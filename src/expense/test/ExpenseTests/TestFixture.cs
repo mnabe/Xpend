@@ -11,7 +11,7 @@ namespace ExpenseTests
     public class TestFixture: IDisposable
     {
         private readonly DbContextOptions<ExpenseDataContext> _options;
-        public ExpenseDataContext ExpenseDataContext { get; private set; }
+        internal ExpenseDataContext ExpenseDataContext { get; private set; }
         public Fixture Fixture { get; private set; }
         public TestFixture()
         {

@@ -3,7 +3,7 @@ using System;
 
 namespace expense.Persistence
 {
-    public class ExpenseDataContext: DbContext
+    internal class ExpenseDataContext: DbContext
     {
         public ExpenseDataContext(DbContextOptions<ExpenseDataContext> options): base(options)
         {

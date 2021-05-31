@@ -5,7 +5,7 @@ using System.Text;
 
 namespace expense.Persistence
 {
-    public class ExpenseEntity
+    internal class ExpenseEntity
     {
         public int ExpenseId { get; set; }
         public ExpenseCategory ExpenseCategory { get; set; }

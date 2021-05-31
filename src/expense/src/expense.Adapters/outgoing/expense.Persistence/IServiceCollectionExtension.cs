@@ -3,7 +3,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
+
+[assembly: InternalsVisibleTo("ExpenseTests")]
+[assembly: InternalsVisibleTo("expense.WebApi")]
 
 namespace expense.Persistence
 {
