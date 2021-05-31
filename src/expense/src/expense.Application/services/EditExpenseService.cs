@@ -9,7 +9,7 @@ using System.Text;
 
 namespace expense.Application.services
 {
-    public class EditExpenseService : IEditExpense
+    internal class EditExpenseService : IEditExpense
     {
         private readonly IUpdateExpense _updateExpense;
         public EditExpenseService(IUpdateExpense updateExpense)
