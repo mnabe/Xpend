@@ -14,9 +14,9 @@ namespace ExpenseTests.Domain
         public void UpdatesExpense()
         {
             //Arrange
-            Fixture fixture = new Fixture();
-            fixture.Customize<Expense>(c => c.With(x => x.ExpenseCategory, ExpenseCategory.FOOD));
-            Expense expense = fixture.Create<Expense>();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize<Expense>(c => c.With(x => x.ExpenseCategory, ExpenseCategory.FOOD));
+            Expense expense = _testFixture.Fixture.Create<Expense>();
 
             //Act
             expense.ExpenseCategory = ExpenseCategory.HOTEL;
