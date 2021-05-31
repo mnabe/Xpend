@@ -17,8 +17,10 @@ namespace ExpenseTests.Adapters.incoming
         public void GetExpense_Success()
         {
             //Arrrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            //Setup
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
 
             //Act
             var result = expenseController.GetExpense(1);
@@ -31,8 +33,9 @@ namespace ExpenseTests.Adapters.incoming
         public void GetExpenses_Success()
         {
             //Arrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
 
             //Act
             var result = expenseController.GetExpenses();
@@ -46,8 +49,9 @@ namespace ExpenseTests.Adapters.incoming
         public void CreateExpense_Success()
         {
             //Arrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
             string expenseCategory = "HOTEL";
             decimal expenseCost = 700;
 
@@ -64,8 +68,9 @@ namespace ExpenseTests.Adapters.incoming
         public void EditExpense_Succes()
         {
             //Arrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            var expenseController = fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
             int expenseId = 1;
             string expenseCategory = "HOTEL";
             decimal expenseCost = 700;
