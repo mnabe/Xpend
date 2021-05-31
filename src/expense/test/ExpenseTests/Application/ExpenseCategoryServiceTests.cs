@@ -17,8 +17,9 @@ namespace ExpenseTests.Application
         public void ExpenseCategoryStringIsConvertedToEnum_Success()
         {
             //Arrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            ExpenseCategoryService service = fixture.Create<ExpenseCategoryService>();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            ExpenseCategoryService service = _testFixture.Fixture.Create<ExpenseCategoryService>();
             string expenseCategoryString = "HOTEL";
 
             //Act
@@ -33,8 +34,9 @@ namespace ExpenseTests.Application
         public void ExpenseCategoryStringIsConvertedToEnum_Fails()
         {
             //Arrange
-            var fixture = new Fixture().Customize(new AutoMoqCustomization());
-            ExpenseCategoryService service = fixture.Create<ExpenseCategoryService>();
+            TestFixture _testFixture = new TestFixture();
+            _testFixture.Fixture.Customize(new AutoMoqCustomization());
+            ExpenseCategoryService service = _testFixture.Fixture.Create<ExpenseCategoryService>();
             string expenseCategoryString = "INVALID CATEGORY";
 
             //Act
