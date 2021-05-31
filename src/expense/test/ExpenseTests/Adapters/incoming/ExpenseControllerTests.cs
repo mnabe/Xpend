@@ -16,7 +16,6 @@ namespace ExpenseTests.Adapters.incoming
         [Fact]
         public void GetExpense_Success()
         {
-            //Arrrange
             //Setup
             TestFixture _testFixture = new TestFixture();
             _testFixture.Fixture.Customize(new AutoMoqCustomization());
