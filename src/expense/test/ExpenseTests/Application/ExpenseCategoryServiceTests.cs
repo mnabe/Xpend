@@ -38,10 +38,10 @@ namespace ExpenseTests.Application
             string expenseCategoryString = "INVALID CATEGORY";
 
             //Act
-            Action act = () => service.checkValidCategoryEnum(expenseCategoryString);
+            Action action = () => service.checkValidCategoryEnum(expenseCategoryString);
 
             //Assert
-            act.Should().Throw<ArgumentException>();
+            action.Should().Throw<ArgumentException>();
         }
     }
 }
