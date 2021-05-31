@@ -1,11 +1,15 @@
 ﻿using expense.Domain.Enums;
 using System;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("ExpenseTests")]
+[assembly: InternalsVisibleTo("expense.WebApi")]
 
 namespace expense.Application.services.Shared
 {
-    public class ExpenseCategoryService
+    internal class ExpenseCategoryService
     {
-        public ExpenseCategory checkValidCategoryEnum(string expenseCategoryString)
+        internal ExpenseCategory checkValidCategoryEnum(string expenseCategoryString)
         {
             ExpenseCategory expenseCategory = (ExpenseCategory)Enum.Parse(typeof(ExpenseCategory), expenseCategoryString);
             return expenseCategory;

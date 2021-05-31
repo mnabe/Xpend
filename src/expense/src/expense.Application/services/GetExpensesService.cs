@@ -7,7 +7,7 @@ using System.Text;
 
 namespace expense.Application.services
 {
-    public class GetExpensesService : IGetExpenses
+    internal class GetExpensesService : IGetExpenses
     {
         private readonly IFindExpenses _findExpenses;
         public GetExpensesService(IFindExpenses findExpenses)
