@@ -25,10 +25,5 @@ namespace ExpenseTests.Application
             //Assert
             Assert.True(success);
         }
-
-        //public void CreateExpense_ThrowsException()
-        //{
-            //Use FluentAssertions
-        //}
     }
 }
