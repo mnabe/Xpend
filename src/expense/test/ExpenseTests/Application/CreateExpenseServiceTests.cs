@@ -2,9 +2,6 @@
 using AutoFixture.AutoMoq;
 using expense.Application.ports.incoming;
 using expense.Application.services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace ExpenseTests.Application
