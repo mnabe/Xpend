@@ -2,9 +2,6 @@
 using expense.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ExpenseTests
 {
@@ -20,11 +17,9 @@ namespace ExpenseTests
             ExpenseDataContext = new ExpenseDataContext(_options);
             Fixture = new Fixture();
         }
-
         public void Dispose()
         {
             ExpenseDataContext.Dispose();
-
         }
     }
 }

@@ -78,8 +78,5 @@ namespace ExpenseTests.Adapters.incoming
             result.Should().BeOfType<OkObjectResult>()
                 .Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
         }
-
-        //[Fact]
-        //public void CreateExpense_ThrowsException()
     }
 }
