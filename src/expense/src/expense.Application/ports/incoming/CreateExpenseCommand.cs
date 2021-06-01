@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace expense.Application.ports.incoming
+﻿namespace expense.Application.ports.incoming
 {
     public class CreateExpenseCommand
     {
