@@ -48,7 +48,6 @@ namespace expense.Persistence
             _context.SaveChanges();
             Expense expense = _mapper.Map<Expense>(expenseEntity);
             return expense;
-
         }
     }
 }
