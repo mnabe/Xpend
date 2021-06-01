@@ -1,8 +1,5 @@
 ﻿using AutoFixture;
-using expense.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 using System.Linq;
 using expense.Persistence;

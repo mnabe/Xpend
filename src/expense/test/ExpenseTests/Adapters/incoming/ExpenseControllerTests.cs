@@ -3,10 +3,7 @@ using AutoFixture.AutoMoq;
 using expense.WebApi.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using Xunit;
 
 namespace ExpenseTests.Adapters.incoming
