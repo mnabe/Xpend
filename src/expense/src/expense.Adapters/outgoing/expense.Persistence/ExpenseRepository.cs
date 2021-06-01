@@ -2,9 +2,7 @@
 using expense.Application.ports.outgoing;
 using expense.Domain.Entities;
 using expense.Domain.Enums;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace expense.Persistence
