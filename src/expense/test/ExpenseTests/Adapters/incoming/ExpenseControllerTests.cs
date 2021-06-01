@@ -56,7 +56,7 @@ namespace ExpenseTests.Adapters.incoming
             var result = expenseController.CreateExpense(expenseCategory, expenseCost);
 
             //Assert
-            result.Should().BeOfType<OkObjectResult>()
+            result.Should().BeOfType<CreatedAtActionResult>()
                 .Which.StatusCode.Should().Be((int)HttpStatusCode.Created);
         }
 

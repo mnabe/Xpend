@@ -38,7 +38,7 @@ namespace expense.WebApi.Controllers
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
             _createExpense.CreateExpense(command);
-            return Ok(command); //should be changed to CreatedAtAction
+            return CreatedAtAction(nameof(GetExpense), command);
         }
 
         [HttpPut]
