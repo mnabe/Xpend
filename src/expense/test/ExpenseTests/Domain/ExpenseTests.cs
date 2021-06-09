@@ -19,7 +19,7 @@ namespace ExpenseTests.Domain
             expense.ExpenseCategory = ExpenseCategory.HOTEL;
 
             //Assert
-            Assert.True(true);
+            Assert.Equal(ExpenseCategory.HOTEL, expense.ExpenseCategory);
         }
     }
 }
