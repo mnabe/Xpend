@@ -1,6 +1,7 @@
 ﻿using expense.Application.ports.incoming;
 using expense.Application.ports.outgoing;
 using expense.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace expense.Application.services
 {
@@ -11,9 +12,9 @@ namespace expense.Application.services
         {
             _findExpense = findExpense;
         }
-        public Expense GetExpense(int id)
+        public async Task<Expense> GetExpense(int id)
         {
-            Expense expense = _findExpense.Find(id);
+            Expense expense = await _findExpense.Find(id);
             return expense;
         }
     }
