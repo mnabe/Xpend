@@ -1,9 +1,10 @@
 ﻿using expense.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace expense.Application.ports.incoming
 {
     public interface IGetExpense
     {
-        Expense GetExpense(int id);
+        Task<Expense> GetExpense(int id);
     }
 }
