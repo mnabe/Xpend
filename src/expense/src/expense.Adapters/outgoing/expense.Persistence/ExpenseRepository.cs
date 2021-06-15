@@ -4,6 +4,7 @@ using expense.Domain.Entities;
 using expense.Domain.Enums;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace expense.Persistence
 {
@@ -17,9 +18,9 @@ namespace expense.Persistence
             _mapper = mapper;
             _context = context;
         }
-        public Expense Find(int id)
+        public async Task<Expense> Find(int id)
         {
-            var response = _context.Expenses.Find(id);
+            var response = await _context.Expenses.FindAsync(id);
             Expense expense = _mapper.Map<Expense>(response);
             return expense;
         }
