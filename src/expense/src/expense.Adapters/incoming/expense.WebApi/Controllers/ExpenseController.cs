@@ -1,5 +1,6 @@
 ﻿using expense.Application.ports.incoming;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace expense.WebApi.Controllers
 {
@@ -20,9 +21,9 @@ namespace expense.WebApi.Controllers
         }
 
         [HttpGet("id")]
-        public ActionResult GetExpense(int id)
+        public async Task<ActionResult> GetExpense(int id)
         {
-            var response = _getExpense.GetExpense(id);
+            var response = await _getExpense.GetExpense(id);
             return Ok(response);
         }
 
