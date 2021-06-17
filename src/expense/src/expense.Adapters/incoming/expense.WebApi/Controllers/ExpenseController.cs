@@ -1,6 +1,5 @@
 ﻿using expense.Application.ports.incoming;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace expense.WebApi.Controllers
