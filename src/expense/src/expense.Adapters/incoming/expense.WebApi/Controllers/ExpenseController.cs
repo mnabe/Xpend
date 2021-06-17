@@ -1,5 +1,6 @@
 ﻿using expense.Application.ports.incoming;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace expense.WebApi.Controllers
@@ -20,6 +21,7 @@ namespace expense.WebApi.Controllers
             _editExpense = editExpense;
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet("id")]
         public async Task<ActionResult> GetExpense(int id)
         {

@@ -30,6 +30,7 @@ namespace expense.WebApi
                 cfg.CreateMap<ExpenseEntity, Expense>();
             });
             IMapper mapper = configuration.CreateMapper();
+            services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
             services.AddSingleton(mapper);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
@@ -55,6 +56,7 @@ namespace expense.WebApi
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseResponseCaching();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
