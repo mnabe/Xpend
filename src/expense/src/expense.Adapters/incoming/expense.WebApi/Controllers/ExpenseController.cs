@@ -1,6 +1,7 @@
 ﻿using expense.Application.ports.incoming;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -24,16 +25,24 @@ namespace expense.WebApi.Controllers
 
         [ResponseCache(Duration = 60)]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id")]
         public async Task<ActionResult> GetExpense([Required] int id)
         {
-            var response = await _getExpense.GetExpense(id);
-            if (response == null)
+            try
             {
-                return NotFound();
+                var response = await _getExpense.GetExpense(id);
+                if (response == null)
+                {
+                    return NotFound();
+                }
+                return Ok(response);
             }
-            return Ok(response); 
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }        
         }
 
         [HttpGet]
