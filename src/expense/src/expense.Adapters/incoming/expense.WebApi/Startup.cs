@@ -43,15 +43,6 @@ namespace expense.WebApi
             services.AddScoped<IFindExpense, ExpenseRepository>();
             services.AddScoped<IEditExpense, EditExpenseService>();
             services.AddScoped<IUpdateExpense, ExpenseRepository>();
-            //services.AddLinks(config =>
-            //{
-            //    config.AddPolicy<Expense>(policy =>
-            //    {
-            //        policy.RequireRoutedLink("GetAll", "GetAllExpenses")
-            //              .RequireRoutedLink("Post", "PostExpense")
-            //              .RequireRoutedLink("Put", "PutExpense");
-            //    });
-            //});
             services.AddSwaggerGen();
             services.AddControllers().AddLink(builder =>
             {
