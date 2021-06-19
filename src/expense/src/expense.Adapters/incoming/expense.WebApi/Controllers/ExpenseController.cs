@@ -1,4 +1,5 @@
 ﻿using expense.Application.ports.incoming;
+using expense.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,7 +29,7 @@ namespace expense.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id")]
-        public async Task<ActionResult> GetExpense([Required] int id)
+        public async Task<ActionResult<Expense>> GetExpense([Required] int id)
         {
             try
             {
@@ -45,14 +46,14 @@ namespace expense.WebApi.Controllers
             }        
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAllExpenses")]
         public ActionResult GetExpenses()
         {
             var response = _getExpenses.GetExpenses();
             return Ok(response);
         }
  
-        [HttpPost]
+        [HttpPost(Name = "PostExpense")]
         public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
@@ -60,7 +61,7 @@ namespace expense.WebApi.Controllers
             return CreatedAtAction(nameof(GetExpense), command);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "PutExpenses")]
         public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
         {
             EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);

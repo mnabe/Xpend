@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Sciensoft.Hateoas;
+using Sciensoft.Hateoas.Extensions;
 
 namespace expense.WebApi
 {
@@ -41,8 +43,23 @@ namespace expense.WebApi
             services.AddScoped<IFindExpense, ExpenseRepository>();
             services.AddScoped<IEditExpense, EditExpenseService>();
             services.AddScoped<IUpdateExpense, ExpenseRepository>();
+            //services.AddLinks(config =>
+            //{
+            //    config.AddPolicy<Expense>(policy =>
+            //    {
+            //        policy.RequireRoutedLink("GetAll", "GetAllExpenses")
+            //              .RequireRoutedLink("Post", "PostExpense")
+            //              .RequireRoutedLink("Put", "PutExpense");
+            //    });
+            //});
             services.AddSwaggerGen();
-            services.AddControllers().ConfigureApiBehaviorOptions(options =>
+            services.AddControllers().AddLink(builder =>
+            {
+                builder.AddPolicy<Expense>(model =>
+                {
+                    model.AddSelf(m => m.ExpenseId, "This is a GET Link");
+                });
+            }).ConfigureApiBehaviorOptions(options =>
             {
                 //Disable responses with status code 4xx and higher from being translated into a ProblemDetails result
                 options.SuppressMapClientErrors = true;
