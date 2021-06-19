@@ -40,7 +40,6 @@ namespace expense.Persistence
             _context.SaveChanges();
             return expense;
         }
-
         public Expense UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
         {
             var expenseEntity = _context.Expenses.Find(id);
