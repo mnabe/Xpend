@@ -42,7 +42,11 @@ namespace expense.WebApi
             services.AddScoped<IEditExpense, EditExpenseService>();
             services.AddScoped<IUpdateExpense, ExpenseRepository>();
             services.AddSwaggerGen();
-            services.AddControllers();
+            services.AddControllers().ConfigureApiBehaviorOptions(options =>
+            {
+                //Disable responses with status code 4xx and higher from being translated into a ProblemDetails result
+                options.SuppressMapClientErrors = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
