@@ -29,6 +29,7 @@ namespace expense.WebApi.Controllers
         }
 
         [ResponseCache(Duration = 60)]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
