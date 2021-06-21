@@ -12,6 +12,10 @@ namespace expense.WebApi.Controllers
     [ApiController]
     public class ExpenseController : ControllerBase
     {
+        public const string FindExpense = nameof(FindExpense);
+        public const string PostExpense = nameof(PostExpense);
+        public const string PutExpense = nameof(PutExpense);
+
         private readonly ICreateExpense _createExpense;
         private readonly IGetExpenses _getExpenses;
         private readonly IGetExpense _getExpense;
@@ -28,7 +32,7 @@ namespace expense.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("id")]
+        [HttpGet("id", Name = "FindExpense")]
         public async Task<ActionResult<Expense>> GetExpense([Required] int id)
         {
             try
@@ -46,7 +50,7 @@ namespace expense.WebApi.Controllers
             }        
         }
 
-        [HttpGet(Name = "GetAllExpenses")]
+        [HttpGet(Name = "FindAllExpenses")]
         public ActionResult GetExpenses()
         {
             var response = _getExpenses.GetExpenses();
@@ -61,7 +65,7 @@ namespace expense.WebApi.Controllers
             return CreatedAtAction(nameof(GetExpense), command);
         }
 
-        [HttpPut(Name = "PutExpenses")]
+        [HttpPut(Name = "PutExpense")]
         public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
         {
             EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);

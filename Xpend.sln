@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expense.Domain", "src\expen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExpenseTests", "src\expense\test\ExpenseTests\ExpenseTests.csproj", "{918571DE-ADEA-44C6-AF0C-B3AF761419EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "expense.Application", "src\expense\src\expense.Application\expense.Application.csproj", "{C7008358-EE49-40DF-A671-A2960A64DC05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expense.Application", "src\expense\src\expense.Application\expense.Application.csproj", "{C7008358-EE49-40DF-A671-A2960A64DC05}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "expense.Adapters", "expense.Adapters", "{487E08D8-AB34-4F7C-8F47-FB502AC40158}"
 EndProject
@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "outgoing", "outgoing", "{AC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expense.WebApi", "src\expense\src\expense.Adapters\incoming\expense.WebApi\expense.WebApi.csproj", "{0F0D0B97-24EF-4AF3-BD88-F74198A05B52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "expense.Persistence", "src\expense\src\expense.Adapters\outgoing\expense.Persistence\expense.Persistence.csproj", "{5B6C42D3-9D90-44A3-93BC-9A8B55D5B2DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "expense.Persistence", "src\expense\src\expense.Adapters\outgoing\expense.Persistence\expense.Persistence.csproj", "{5B6C42D3-9D90-44A3-93BC-9A8B55D5B2DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

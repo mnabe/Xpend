@@ -4,6 +4,7 @@ using expense.Application.ports.outgoing;
 using expense.Application.services;
 using expense.Domain.Entities;
 using expense.Persistence;
+using expense.WebApi.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +49,9 @@ namespace expense.WebApi
             {
                 builder.AddPolicy<Expense>(model =>
                 {
-                    model.AddSelf(m => m.ExpenseId, "This is a GET Link");
+                    model.AddRoute(m => m.ExpenseId, ExpenseController.PutExpense, message: "Put expense");
+                    model.AddRoute(m => m.ExpenseId, ExpenseController.PostExpense, message: "Post expense");
+                    model.AddRoute(m => m.ExpenseId, ExpenseController.FindExpense, message: "Find expense");
                 });
             }).ConfigureApiBehaviorOptions(options =>
             {
