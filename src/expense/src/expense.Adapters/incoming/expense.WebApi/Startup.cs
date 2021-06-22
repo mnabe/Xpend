@@ -50,7 +50,6 @@ namespace expense.WebApi
                 builder.AddPolicy<Expense>(model =>
                 {
                     model.AddRoute(m => m.ExpenseId, ExpenseController.PutExpense, message: "Put expense");
-                    model.AddRoute(m => m.ExpenseId, ExpenseController.PostExpense, message: "Post expense");
                     model.AddRoute(m => m.ExpenseId, ExpenseController.FindExpense, message: "Find expense");
                 });
             }).ConfigureApiBehaviorOptions(options =>
