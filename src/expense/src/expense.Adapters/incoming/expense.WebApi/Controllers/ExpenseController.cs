@@ -27,7 +27,7 @@ namespace expense.WebApi.Controllers
             _editExpense = editExpense;
         }
 
-        [ResponseCache(Duration = 60)]
+        [ResponseCache(Duration = 60, VaryByQueryKeys = new string[] { "id" })]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
