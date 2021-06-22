@@ -13,7 +13,6 @@ namespace expense.WebApi.Controllers
     public class ExpenseController : ControllerBase
     {
         public const string FindExpense = nameof(FindExpense);
-        public const string PostExpense = nameof(PostExpense);
         public const string PutExpense = nameof(PutExpense);
 
         private readonly ICreateExpense _createExpense;
@@ -51,14 +50,14 @@ namespace expense.WebApi.Controllers
             }        
         }
 
-        [HttpGet(Name = "FindAllExpenses")]
+        [HttpGet]
         public ActionResult GetExpenses()
         {
             var response = _getExpenses.GetExpenses();
             return Ok(response);
         }
  
-        [HttpPost(Name = PostExpense)]
+        [HttpPost]
         public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
