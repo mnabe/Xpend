@@ -33,7 +33,7 @@ namespace expense.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("id", Name = "FindExpense")]
+        [HttpGet("id", Name = FindExpense)]
         public async Task<ActionResult<Expense>> GetExpense([Required] int id)
         {
             try
@@ -58,7 +58,7 @@ namespace expense.WebApi.Controllers
             return Ok(response);
         }
  
-        [HttpPost(Name = "PostExpense")]
+        [HttpPost(Name = PostExpense)]
         public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
@@ -66,7 +66,7 @@ namespace expense.WebApi.Controllers
             return CreatedAtAction(nameof(GetExpense), command);
         }
 
-        [HttpPut(Name = "PutExpense")]
+        [HttpPut(Name = PutExpense)]
         public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
         {
             EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
