@@ -4,10 +4,16 @@ namespace expense.Domain.Entities
 {
     public class Expense
     {
-        public int ExpenseId { get; set; }
-        public ExpenseCategory ExpenseCategory { get; set; }
-        public decimal ExpenseCost { get; set; }
-        public ExpenseStatus ExpenseStatus { get; set; }
+        public int ExpenseId { get; private set; }
+        public ExpenseCategory ExpenseCategory { get; private set; }
+        public decimal ExpenseCost { get; private set; }
+        public ExpenseStatus ExpenseStatus { get; private set; }
+        public Expense(ExpenseCategory expenseCategory, decimal expenseCost, ExpenseStatus expenseStatus)
+        {
+            ExpenseCategory = expenseCategory;
+            ExpenseCost = expenseCost;
+            ExpenseStatus = expenseStatus;
+        }
         public void UpdatesExpenseCategory(ExpenseCategory expenseCategory)
         {
             ExpenseCategory = expenseCategory;
