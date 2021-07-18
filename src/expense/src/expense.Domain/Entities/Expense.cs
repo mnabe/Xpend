@@ -8,7 +8,7 @@ namespace expense.Domain.Entities
         public ExpenseCategory ExpenseCategory { get; private set; }
         public decimal ExpenseCost { get; private set; }
         public ExpenseStatus ExpenseStatus { get; private set; }
-        public Expense(ExpenseCategory expenseCategory, decimal expenseCost, ExpenseStatus expenseStatus)
+        public Expense(ExpenseCategory expenseCategory, decimal expenseCost, ExpenseStatus expenseStatus = ExpenseStatus.RECEIVED)
         {
             ExpenseCategory = expenseCategory;
             ExpenseCost = expenseCost;
