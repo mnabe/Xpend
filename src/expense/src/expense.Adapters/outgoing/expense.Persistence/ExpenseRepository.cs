@@ -32,9 +32,7 @@ namespace expense.Persistence
         }
         public Expense Add(ExpenseCategory expenseCategory, decimal expenseCost)
         {
-            Expense expense = new Expense();
-            expense.ExpenseCategory = expenseCategory;
-            expense.ExpenseCost = expenseCost;
+            Expense expense = new Expense(expenseCategory, expenseCost, ExpenseStatus.RECEIVED);
             ExpenseEntity entity = _mapper.Map<ExpenseEntity>(expense);
             _context.Expenses.Add(entity);
             _context.SaveChanges();
