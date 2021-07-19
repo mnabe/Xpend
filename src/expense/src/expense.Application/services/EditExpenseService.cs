@@ -9,14 +9,15 @@ namespace expense.Application.services
     internal class EditExpenseService : IEditExpense
     {
         private readonly IUpdateExpense _updateExpense;
+        private readonly ExpenseCategoryValidation _expenseCategoryValidation;
         public EditExpenseService(IUpdateExpense updateExpense)
         {
             _updateExpense = updateExpense;
+            _expenseCategoryValidation = new ExpenseCategoryValidation();
         }
         public Expense EditExpense(EditExpenseCommand command)
         {
-            ExpenseCategoryService expenseCategoryService = new ExpenseCategoryService();
-            ExpenseCategory expenseCategory = expenseCategoryService.checkValidCategoryEnum(command.ExpenseCategory);
+            ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
             var response = _updateExpense.UpdateExpense(command.ExpenseId, expenseCategory, command.ExpenseCost);
             return response;
         }
