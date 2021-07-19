@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 
 namespace expense.Application.services.Shared
 {
-    internal class ExpenseCategoryService
+    internal class ExpenseCategoryValidation
     {
         internal ExpenseCategory checkValidCategoryEnum(string expenseCategoryString)
         {
