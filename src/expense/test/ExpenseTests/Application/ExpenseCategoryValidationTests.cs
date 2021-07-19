@@ -8,7 +8,7 @@ using FluentAssertions;
 
 namespace ExpenseTests.Application
 {
-    public class ExpenseCategoryServiceTests
+    public class ExpenseCategoryValidationTests
     {
         [Fact]
         public void ExpenseCategoryStringIsConvertedToEnum_Success()
@@ -16,11 +16,11 @@ namespace ExpenseTests.Application
             //Arrange
             TestFixture _testFixture = new TestFixture();
             _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            ExpenseCategoryService service = _testFixture.Fixture.Create<ExpenseCategoryService>();
+            ExpenseCategoryValidation expenseCategoryValidation = _testFixture.Fixture.Create<ExpenseCategoryValidation>();
             string expenseCategoryString = "HOTEL";
 
             //Act
-            var response = service.checkValidCategoryEnum(expenseCategoryString);
+            var response = expenseCategoryValidation.checkValidCategoryEnum(expenseCategoryString);
 
             //Assert
             Assert.Equal(ExpenseCategory.HOTEL, response);
@@ -33,11 +33,11 @@ namespace ExpenseTests.Application
             //Arrange
             TestFixture _testFixture = new TestFixture();
             _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            ExpenseCategoryService service = _testFixture.Fixture.Create<ExpenseCategoryService>();
+            ExpenseCategoryValidation expenseCategoryValidation = _testFixture.Fixture.Create<ExpenseCategoryValidation>();
             string expenseCategoryString = "INVALID CATEGORY";
 
             //Act
-            Action action = () => service.checkValidCategoryEnum(expenseCategoryString);
+            Action action = () => expenseCategoryValidation.checkValidCategoryEnum(expenseCategoryString);
 
             //Assert
             action.Should().Throw<ArgumentException>();
