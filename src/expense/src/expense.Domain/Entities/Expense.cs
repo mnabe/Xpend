@@ -14,9 +14,5 @@ namespace expense.Domain.Entities
             ExpenseCost = expenseCost;
             ExpenseStatus = expenseStatus;
         }
-        public void UpdatesExpenseCategory(ExpenseCategory expenseCategory)
-        {
-            ExpenseCategory = expenseCategory;
-        }
     }
 }
