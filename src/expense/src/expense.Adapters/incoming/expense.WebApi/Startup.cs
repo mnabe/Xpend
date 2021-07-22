@@ -33,9 +33,9 @@ namespace expense.WebApi
                 cfg.CreateMap<ExpenseEntity, Expense>();
             });
             IMapper mapper = configuration.CreateMapper();
+            services.AddAutoMapper(typeof(Startup));
             services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
-            services.AddSingleton(mapper);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
             services.AddScoped<IAddExpense, ExpenseRepository>();
             services.AddScoped<IGetExpenses, GetExpensesService>();
