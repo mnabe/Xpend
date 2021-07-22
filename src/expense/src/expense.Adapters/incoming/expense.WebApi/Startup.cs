@@ -4,6 +4,7 @@ using expense.Application.ports.outgoing;
 using expense.Application.services;
 using expense.Domain.Entities;
 using expense.Persistence;
+using expense.WebApi.Configuration;
 using expense.WebApi.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,8 +30,7 @@ namespace expense.WebApi
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Expense, ExpenseEntity>();
-                cfg.CreateMap<ExpenseEntity, Expense>();
+                cfg.AddProfile<ExpenseProfile>();
             });
             IMapper mapper = configuration.CreateMapper();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
