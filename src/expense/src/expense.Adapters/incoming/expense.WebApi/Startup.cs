@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Sciensoft.Hateoas;
 using Sciensoft.Hateoas.Extensions;
+using System.Reflection;
 
 namespace expense.WebApi
 {
@@ -33,7 +34,7 @@ namespace expense.WebApi
                 cfg.CreateMap<ExpenseEntity, Expense>();
             });
             IMapper mapper = configuration.CreateMapper();
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
