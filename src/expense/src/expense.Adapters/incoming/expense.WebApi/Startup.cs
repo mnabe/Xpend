@@ -3,6 +3,7 @@ using expense.Application.ports.outgoing;
 using expense.Application.services;
 using expense.Domain.Entities;
 using expense.Persistence;
+using expense.WebApi.Configuration;
 using expense.WebApi.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,7 +27,7 @@ namespace expense.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(ExpenseProfile));
             services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
