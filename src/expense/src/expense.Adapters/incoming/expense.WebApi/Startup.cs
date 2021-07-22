@@ -28,11 +28,6 @@ namespace expense.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var configuration = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<ExpenseProfile>();
-            });
-            IMapper mapper = configuration.CreateMapper();
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
