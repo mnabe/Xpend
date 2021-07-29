@@ -3,6 +3,7 @@ using expense.Application.ports.outgoing;
 using expense.Application.services.Shared;
 using expense.Domain.Entities;
 using expense.Domain.Enums;
+using System.Threading.Tasks;
 
 namespace expense.Application.services
 {
@@ -15,10 +16,10 @@ namespace expense.Application.services
             _updateExpense = updateExpense;
             _expenseCategoryValidation = new ExpenseCategoryValidation();
         }
-        public Expense EditExpense(EditExpenseCommand command)
+        public async Task<Expense> EditExpense(EditExpenseCommand command)
         {
             ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
-            var response = _updateExpense.UpdateExpense(command.ExpenseId, expenseCategory, command.ExpenseCost);
+            var response = await _updateExpense.UpdateExpense(command.ExpenseId, expenseCategory, command.ExpenseCost);
             return response;
         }
     }
