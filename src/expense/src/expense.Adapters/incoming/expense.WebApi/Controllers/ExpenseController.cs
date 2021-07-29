@@ -51,6 +51,7 @@ namespace expense.WebApi.Controllers
             }        
         }
 
+        [ResponseCache(Duration = 60)]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
         {
