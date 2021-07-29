@@ -31,12 +31,12 @@ namespace expense.Persistence
             IEnumerable<Expense> expenses = _mapper.Map<IEnumerable<Expense>>(response);
             return expenses;
         }
-        public Expense Add(ExpenseCategory expenseCategory, decimal expenseCost)
+        public async Task<Expense> Add(ExpenseCategory expenseCategory, decimal expenseCost)
         {
             Expense expense = new Expense(expenseCategory, expenseCost, ExpenseStatus.RECEIVED);
             ExpenseEntity entity = _mapper.Map<ExpenseEntity>(expense);
-            _context.Expenses.Add(entity);
-            _context.SaveChanges();
+            await _context.Expenses.AddAsync(entity);
+            await _context.SaveChangesAsync();
             return expense;
         }
         public Expense UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
