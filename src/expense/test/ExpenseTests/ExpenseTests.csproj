@@ -29,8 +29,4 @@
     <ProjectReference Include="..\..\src\expense.Domain\expense.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Domain\" />
-  </ItemGroup>
-
 </Project>
