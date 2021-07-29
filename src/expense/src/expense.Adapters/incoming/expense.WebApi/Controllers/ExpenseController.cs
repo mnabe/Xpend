@@ -59,10 +59,10 @@ namespace expense.WebApi.Controllers
         }
  
         [HttpPost]
-        public ActionResult CreateExpense(string expenseCategory, decimal expenseCost)
+        public async Task<ActionResult> CreateExpense(string expenseCategory, decimal expenseCost)
         {
             CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
-            _createExpense.CreateExpense(command);
+            await _createExpense.CreateExpense(command);
             return CreatedAtAction(nameof(GetExpense), command);
         }
 
