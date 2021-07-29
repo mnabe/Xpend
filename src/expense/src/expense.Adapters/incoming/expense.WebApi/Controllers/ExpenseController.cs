@@ -67,10 +67,10 @@ namespace expense.WebApi.Controllers
         }
 
         [HttpPut(Name = PutExpense)]
-        public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
+        public async Task<ActionResult> EditExpense(int id, string expenseCategory, decimal expenseCost)
         {
             EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
-            Expense response = _editExpense.EditExpense(command);
+            Expense response = await _editExpense.EditExpense(command);
             return Ok(response);
         }
     }
