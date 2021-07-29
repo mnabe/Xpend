@@ -3,6 +3,7 @@ using expense.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
@@ -37,7 +38,7 @@ namespace expense.WebApi.Controllers
         {
             try
             {
-                var response = await _getExpense.GetExpense(id);
+                Expense response = await _getExpense.GetExpense(id);
                 if (response == null)
                 {
                     return NotFound();
@@ -51,9 +52,9 @@ namespace expense.WebApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetExpenses()
+        public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
         {
-            var response = _getExpenses.GetExpenses();
+            IEnumerable<Expense> response = await _getExpenses.GetExpenses();
             return Ok(response);
         }
  
@@ -69,7 +70,7 @@ namespace expense.WebApi.Controllers
         public ActionResult EditExpense(int id, string expenseCategory, decimal expenseCost)
         {
             EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
-            var response = _editExpense.EditExpense(command);
+            Expense response = _editExpense.EditExpense(command);
             return Ok(response);
         }
     }
