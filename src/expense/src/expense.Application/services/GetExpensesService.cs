@@ -2,6 +2,7 @@
 using expense.Application.ports.outgoing;
 using expense.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace expense.Application.services
 {
@@ -12,9 +13,9 @@ namespace expense.Application.services
         {
             _findExpenses = findExpenses;
         }
-        public List<Expense> GetExpenses()
+        public async Task<IEnumerable<Expense>> GetExpenses()
         {
-            List<Expense> expenses = _findExpenses.Find();
+            IEnumerable<Expense> expenses = await _findExpenses.Find();
             return expenses;
         }
     }
