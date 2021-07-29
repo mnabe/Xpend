@@ -2,6 +2,7 @@
 using expense.Application.ports.outgoing;
 using expense.Domain.Entities;
 using expense.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -24,10 +25,10 @@ namespace expense.Persistence
             Expense expense = _mapper.Map<Expense>(response);
             return expense;
         }
-        public List<Expense> Find()
+        public async Task<IEnumerable<Expense>> Find()
         {
-            var response = _context.Expenses.AsEnumerable();
-            List<Expense> expenses = _mapper.Map<List<Expense>>(response);
+            var response = await _context.Expenses.ToListAsync();
+            IEnumerable<Expense> expenses = _mapper.Map<IEnumerable<Expense>>(response);
             return expenses;
         }
         public Expense Add(ExpenseCategory expenseCategory, decimal expenseCost)
