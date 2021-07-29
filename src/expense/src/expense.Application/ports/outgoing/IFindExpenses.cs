@@ -1,10 +1,11 @@
 ﻿using expense.Domain.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace expense.Application.ports.outgoing
 {
     public interface IFindExpenses
     {
-        List<Expense> Find();
+        public Task<IEnumerable<Expense>> Find();
     }
 }

@@ -5,6 +5,6 @@ namespace expense.Application.ports.incoming
 {
     public interface IGetExpense
     {
-        Task<Expense> GetExpense(int id);
+        public Task<Expense> GetExpense(int id);
     }
 }
