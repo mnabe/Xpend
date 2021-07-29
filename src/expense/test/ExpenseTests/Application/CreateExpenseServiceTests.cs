@@ -20,7 +20,7 @@ namespace ExpenseTests.Application
             bool success;
 
             //Act
-            success = service.CreateExpense(command);
+            success = service.CreateExpense(command).Result;
 
             //Assert
             Assert.True(success);
