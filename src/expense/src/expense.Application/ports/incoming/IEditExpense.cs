@@ -1,9 +1,10 @@
 ﻿using expense.Domain.Entities;
+using System.Threading.Tasks;
 
 namespace expense.Application.ports.incoming
 {
     public interface IEditExpense
     {
-        Expense EditExpense(EditExpenseCommand command);
+        public Task<Expense> EditExpense(EditExpenseCommand command);
     }
 }

@@ -5,6 +5,6 @@ namespace expense.Application.ports.outgoing
 {
     public interface IFindExpense
     {
-        Task<Expense> Find(int id);
+        public Task<Expense> Find(int id);
     }
 }
