@@ -54,24 +54,45 @@ namespace expense.WebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
         {
-            IEnumerable<Expense> response = await _getExpenses.GetExpenses();
-            return Ok(response);
+            try
+            {
+                IEnumerable<Expense> response = await _getExpenses.GetExpenses();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
  
         [HttpPost]
         public async Task<ActionResult> CreateExpense(string expenseCategory, decimal expenseCost)
         {
-            CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
-            await _createExpense.CreateExpense(command);
-            return CreatedAtAction(nameof(GetExpense), command);
+            try
+            {
+                CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
+                await _createExpense.CreateExpense(command);
+                return CreatedAtAction(nameof(GetExpense), command);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPut(Name = PutExpense)]
         public async Task<ActionResult> EditExpense(int id, string expenseCategory, decimal expenseCost)
-        {
-            EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
-            Expense response = await _editExpense.EditExpense(command);
-            return Ok(response);
+        {   
+            try
+            {
+                EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
+                Expense response = await _editExpense.EditExpense(command);
+                return Ok(response);
+            }
+            catch (Exception e) 
+            { 
+                return BadRequest(e.Message); 
+            }
         }
     }
 }
