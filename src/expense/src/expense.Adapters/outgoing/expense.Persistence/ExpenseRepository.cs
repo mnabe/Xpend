@@ -39,12 +39,12 @@ namespace expense.Persistence
             await _context.SaveChangesAsync();
             return expense;
         }
-        public Expense UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
+        public async Task<Expense> UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
         {
-            var expenseEntity = _context.Expenses.Find(id);
+            var expenseEntity = await _context.Expenses.FindAsync(id);
             expenseEntity.ExpenseCategory = expenseCategory;
             expenseEntity.ExpenseCost = expenseCost;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             Expense expense = _mapper.Map<Expense>(expenseEntity);
             return expense;
         }
