@@ -2,6 +2,7 @@
 using expense.Application.ports.outgoing;
 using expense.Domain.Enums;
 using expense.Application.services.Shared;
+using System.Threading.Tasks;
 
 namespace expense.Application.services
 {
@@ -14,10 +15,10 @@ namespace expense.Application.services
             _addExpense = addExpense;
             _expenseCategoryValidation = new ExpenseCategoryValidation();
         }
-        public bool CreateExpense(CreateExpenseCommand command)
+        public async Task<bool> CreateExpense(CreateExpenseCommand command)
         {
             ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
-            _addExpense.Add(expenseCategory, command.ExpenseCost);
+            await _addExpense.Add(expenseCategory, command.ExpenseCost);
             return true;
         }
     }
