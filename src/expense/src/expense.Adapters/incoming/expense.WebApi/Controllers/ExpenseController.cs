@@ -57,6 +57,10 @@ namespace expense.WebApi.Controllers
             try
             {
                 IEnumerable<Expense> response = await _getExpenses.GetExpenses();
+                if (response == null)
+                {
+                    return NotFound();
+                }
                 return Ok(response);
             }
             catch (Exception e)
@@ -87,6 +91,10 @@ namespace expense.WebApi.Controllers
             {
                 EditExpenseCommand command = new EditExpenseCommand(id, expenseCategory, expenseCost);
                 Expense response = await _editExpense.EditExpense(command);
+                if (response == null)
+                {
+                    return NotFound();
+                }
                 return Ok(response);
             }
             catch (Exception e) 
