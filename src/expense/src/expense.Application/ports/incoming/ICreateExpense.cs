@@ -1,7 +1,9 @@
-﻿namespace expense.Application.ports.incoming
+﻿using System.Threading.Tasks;
+
+namespace expense.Application.ports.incoming
 {
     public interface ICreateExpense
     {
-        public bool CreateExpense(CreateExpenseCommand command);
+        public Task<bool> CreateExpense(CreateExpenseCommand command);
     }
 }
