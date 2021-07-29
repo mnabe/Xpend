@@ -34,7 +34,7 @@ namespace expense.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("id", Name = FindExpense)]
-        public async Task<ActionResult<Expense>> GetExpense([Required] int id)
+        public async Task<IActionResult> GetExpense([Required] int id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace expense.WebApi.Controllers
 
         [ResponseCache(Duration = 60)]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Expense>>> GetExpenses()
+        public async Task<IActionResult> GetExpenses()
         {
             try
             {
@@ -71,7 +71,7 @@ namespace expense.WebApi.Controllers
         }
  
         [HttpPost]
-        public async Task<ActionResult> CreateExpense(string expenseCategory, decimal expenseCost)
+        public async Task<IActionResult> CreateExpense(string expenseCategory, decimal expenseCost)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace expense.WebApi.Controllers
         }
 
         [HttpPut(Name = PutExpense)]
-        public async Task<ActionResult> EditExpense(int id, string expenseCategory, decimal expenseCost)
+        public async Task<IActionResult> EditExpense(int id, string expenseCategory, decimal expenseCost)
         {   
             try
             {
