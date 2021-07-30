@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.17.0" />
     <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.6" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -25,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\expense.Adapters\incoming\expense.WebApi\expense.WebApi.csproj" />
+    <ProjectReference Include="..\..\src\expense.Adapters\outgoing\expense.Persistence\expense.Persistence.csproj" />
     <ProjectReference Include="..\..\src\expense.Application\expense.Application.csproj" />
     <ProjectReference Include="..\..\src\expense.Domain\expense.Domain.csproj" />
   </ItemGroup>
