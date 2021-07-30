@@ -4,6 +4,7 @@ using expense.WebApi.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ExpenseTests.Adapters.incoming
@@ -11,7 +12,7 @@ namespace ExpenseTests.Adapters.incoming
     public class ExpenseControllerTests
     {
         [Fact]
-        public void GetExpense_Success()
+        public async Task GetExpense_Success()
         {
             //Setup
             TestFixture _testFixture = new TestFixture();
@@ -19,11 +20,12 @@ namespace ExpenseTests.Adapters.incoming
             var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
 
             //Act
-            var result = expenseController.GetExpense(1);
+            var result = await expenseController.GetExpense(1);
 
             //Assert
-            result.Should().BeOfType<OkObjectResult>()
-                .Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
+            ObjectResult objectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(200, objectResult.StatusCode);
+            result.Should().BeOfType<Task<IActionResult>>();
         }
         [Fact]
         public void GetExpenses_Success()
