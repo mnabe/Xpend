@@ -11,11 +11,9 @@ namespace ExpenseTests.Application
     public class ExpenseCategoryValidationTests
     {
         private Fixture _fixture;
-        private DbFixture _dbFixture;
         public ExpenseCategoryValidationTests()
         {
             _fixture = new Fixture();
-            _dbFixture = new DbFixture();
         }
         [Fact]
         public void ExpenseCategoryStringIsConvertedToEnum_Success()
