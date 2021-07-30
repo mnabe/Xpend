@@ -4,7 +4,6 @@ using expense.Domain.Entities;
 using expense.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace expense.Persistence
