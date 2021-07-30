@@ -8,28 +8,26 @@ namespace ExpenseTests.Adapters.outgoing
 {
     public class ExpensePersistenceTests: IClassFixture<TestFixture>
     {
-        private Fixture _fixture;
-        private DbFixture _dbFixture;
+        private TestFixture _fixture;
         public ExpensePersistenceTests()
         {
-            _fixture = new Fixture();
-            _dbFixture = new DbFixture();
+            _fixture = new TestFixture();
         }
         [Fact]
         public void GetExpenseFromDb_Success()
         {
             //Arrange
-            _fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
-            ExpenseEntity expense = _fixture.Create<ExpenseEntity>();
+            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
+            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
 
             //_testFixture.ExpenseDataContext.Expenses.Add(expense);
-            _dbFixture.ExpenseDataContext.Expenses.Add(expense);
-            _dbFixture.ExpenseDataContext.SaveChanges();
+            _fixture.ExpenseDataContext.Expenses.Add(expense);
+            _fixture.ExpenseDataContext.SaveChanges();
             //_testFixture.ExpenseDataContext.SaveChanges();
-
+            
             //Act
             //ExpenseEntity entity = _testFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
-            ExpenseEntity entity = _dbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
+            ExpenseEntity entity = _fixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
 
             //Assert
             Assert.NotNull(entity);
@@ -39,55 +37,55 @@ namespace ExpenseTests.Adapters.outgoing
         public void GetExpensesFromDb_Success()
         {
             //Arrange
-            _fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 2));
-            ExpenseEntity expenseOne = _fixture.Create<ExpenseEntity>();
-            _fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 3));
-            ExpenseEntity expenseTwo = _fixture.Create<ExpenseEntity>();
-            _dbFixture.ExpenseDataContext.Expenses.Add(expenseOne);
-            _dbFixture.ExpenseDataContext.Expenses.Add(expenseTwo);
-            _dbFixture.ExpenseDataContext.SaveChanges();
+            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 2));
+            ExpenseEntity expenseOne = _fixture.Fixture.Create<ExpenseEntity>();
+            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 3));
+            ExpenseEntity expenseTwo = _fixture.Fixture.Create<ExpenseEntity>();
+            _fixture.ExpenseDataContext.Expenses.Add(expenseOne);
+            _fixture.ExpenseDataContext.Expenses.Add(expenseTwo);
+            _fixture.ExpenseDataContext.SaveChanges();
 
             //Act
-            IEnumerable<ExpenseEntity> expenses = _dbFixture.ExpenseDataContext.Expenses.AsEnumerable();
+            IEnumerable<ExpenseEntity> expenses = _fixture.ExpenseDataContext.Expenses.AsEnumerable();
 
             //Assert
             Assert.Equal(2, expenses.Count());
-            _dbFixture.ExpenseDataContext.ChangeTracker.Clear();
+            _fixture.ExpenseDataContext.ChangeTracker.Clear();
         }
 
         [Fact]
         public void ExpenseAddedToDb_Success()
         {
             //Arrange
-            _fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 4));
-            ExpenseEntity expense = _fixture.Create<ExpenseEntity>();
+            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 4));
+            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
 
             //Act
-            _dbFixture.ExpenseDataContext.Expenses.Add(expense);
-            _dbFixture.ExpenseDataContext.SaveChanges();
+            _fixture.ExpenseDataContext.Expenses.Add(expense);
+            _fixture.ExpenseDataContext.SaveChanges();
 
             //Assert
-            Assert.Equal(1, _dbFixture.ExpenseDataContext.Expenses.Count());
-            _dbFixture.ExpenseDataContext.ChangeTracker.Clear();
+            Assert.Equal(1, _fixture.ExpenseDataContext.Expenses.Count());
+            _fixture.ExpenseDataContext.ChangeTracker.Clear();
         }
 
         [Fact]
         public void ExpenseUpdated_Success()
         {
             //Arrange
-            _fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 5));
-            ExpenseEntity expense = _fixture.Create<ExpenseEntity>();
-            _dbFixture.ExpenseDataContext.Expenses.Add(expense);
-            _dbFixture.ExpenseDataContext.SaveChanges();
+            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 5));
+            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
+            _fixture.ExpenseDataContext.Expenses.Add(expense);
+            _fixture.ExpenseDataContext.SaveChanges();
 
             //Act
-            ExpenseEntity entity = _dbFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 5).FirstOrDefault();
+            ExpenseEntity entity = _fixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 5).FirstOrDefault();
             entity.ExpenseCost = 200;
-            _dbFixture.ExpenseDataContext.SaveChanges();
+            _fixture.ExpenseDataContext.SaveChanges();
 
             //Assert
-            Assert.Equal(200, _dbFixture.ExpenseDataContext.Expenses.FirstOrDefault().ExpenseCost);
-            _dbFixture.ExpenseDataContext.ChangeTracker.Clear();
+            Assert.Equal(200, _fixture.ExpenseDataContext.Expenses.FirstOrDefault().ExpenseCost);
+            _fixture.ExpenseDataContext.ChangeTracker.Clear();
         }
     }
 }
