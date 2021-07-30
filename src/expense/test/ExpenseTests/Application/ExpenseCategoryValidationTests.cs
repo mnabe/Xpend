@@ -10,13 +10,20 @@ namespace ExpenseTests.Application
 {
     public class ExpenseCategoryValidationTests
     {
+        private Fixture _fixture;
+        private DbFixture _dbFixture;
+        public ExpenseCategoryValidationTests()
+        {
+            _fixture = new Fixture();
+            _dbFixture = new DbFixture();
+        }
         [Fact]
         public void ExpenseCategoryStringIsConvertedToEnum_Success()
         {
             //Arrange
-            TestFixture _testFixture = new TestFixture();
-            _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            ExpenseCategoryValidation expenseCategoryValidation = _testFixture.Fixture.Create<ExpenseCategoryValidation>();
+            //TestFixture _testFixture = new TestFixture();
+            //_fixture.Customize(new AutoMoqCustomization());
+            ExpenseCategoryValidation expenseCategoryValidation = _fixture.Create<ExpenseCategoryValidation>();
             string expenseCategoryString = "HOTEL";
 
             //Act
