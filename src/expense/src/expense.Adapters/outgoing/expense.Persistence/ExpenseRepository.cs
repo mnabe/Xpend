@@ -38,7 +38,7 @@ namespace expense.Persistence
             await _context.SaveChangesAsync();
             return expense;
         }
-        public async Task<Expense> UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost)
+        public async Task<Expense> Update(int id, ExpenseCategory expenseCategory, decimal expenseCost)
         {
             var expenseEntity = await _context.Expenses.FindAsync(id);
             expenseEntity.ExpenseCategory = expenseCategory;
