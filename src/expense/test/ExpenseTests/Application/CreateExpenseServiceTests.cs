@@ -2,6 +2,8 @@
 using AutoFixture.AutoMoq;
 using expense.Application.ports.incoming;
 using expense.Application.services;
+using Moq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ExpenseTests.Application
@@ -14,18 +16,16 @@ namespace ExpenseTests.Application
             _fixture = new TestFixture();
         }
         [Fact]
-        public void CreateExpense_Success()
+        public async Task CreateExpense_Success()
         {
             //Arrange
-            TestFixture _testFixture = new TestFixture();
-            _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            _testFixture.Fixture.Customize<CreateExpenseCommand>(c => c.With(x => x.ExpenseCategory, "HOTEL"));
-            CreateExpenseCommand command = _testFixture.Fixture.Create<CreateExpenseCommand>();
-            CreateExpenseService service = _testFixture.Fixture.Create<CreateExpenseService>();
-            bool success;
+            CreateExpenseCommand command = _fixture.Fixture.Create<CreateExpenseCommand>();
+            var mock = new Mock<ICreateExpense>();
+            mock.Setup(foo => foo.CreateExpense(command)).ReturnsAsync(true);
+            ICreateExpense service = mock.Object;
 
             //Act
-            success = service.CreateExpense(command).Result;
+            bool success = await service.CreateExpense(command);
 
             //Assert
             Assert.True(success);
