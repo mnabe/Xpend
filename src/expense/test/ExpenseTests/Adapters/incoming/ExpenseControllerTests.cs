@@ -66,27 +66,5 @@ namespace ExpenseTests.Adapters.incoming
             //Assert
             result.Should().BeOfType<CreatedAtActionResult>();
         }
-
-        [Fact]
-        public async Task EditExpense_Succes()
-        {
-            //Arrange
-            var service = _fixture.Fixture.Freeze<Mock<IEditExpense>>();
-            var expense = _fixture.Fixture.Build<Expense>().With(c => c.ExpenseId, 1).With(c => c.ExpenseCost, 200).Create();
-            var command = _fixture.Fixture.Build<EditExpenseCommand>().With(c => c.ExpenseCost, 300).Create();
-            service.Setup(a => a.EditExpense(command)).ReturnsAsync(expense);
-            var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
-            int expenseId = 1;
-            string expenseCategory = "HOTEL";
-            decimal expenseCost = 300;
-
-            //Act
-            var result = await expenseController.EditExpense(expenseId, expenseCategory, expenseCost);
-
-            //Assert
-            ObjectResult objectResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(200, objectResult.StatusCode);
-            //Assert.Equal(300, result.)
-        }
     }
 }

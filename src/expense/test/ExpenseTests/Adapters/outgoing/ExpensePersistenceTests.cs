@@ -70,24 +70,5 @@ namespace ExpenseTests.Adapters.outgoing
             //Assert
             Assert.IsType<Expense>(response);
         }
-
-        [Fact]
-        public void ExpenseUpdated_Success()
-        {
-            //Arrange
-            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 5));
-            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
-            _fixture.ExpenseDataContext.Expenses.Add(expense);
-            _fixture.ExpenseDataContext.SaveChanges();
-
-            //Act
-            ExpenseEntity entity = _fixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 5).FirstOrDefault();
-            entity.ExpenseCost = 200;
-            _fixture.ExpenseDataContext.SaveChanges();
-
-            //Assert
-            Assert.Equal(200, _fixture.ExpenseDataContext.Expenses.FirstOrDefault().ExpenseCost);
-            _fixture.ExpenseDataContext.ChangeTracker.Clear();
-        }
     }
 }
