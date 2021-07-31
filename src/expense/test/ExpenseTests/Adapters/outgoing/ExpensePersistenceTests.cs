@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Xunit;
 using System.Linq;
-using expense.Persistence;
 using System.Threading.Tasks;
 using Moq;
 using expense.Application.ports.outgoing;
