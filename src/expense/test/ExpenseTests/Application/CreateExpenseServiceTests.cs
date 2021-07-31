@@ -8,6 +8,11 @@ namespace ExpenseTests.Application
 {
     public class CreateExpenseServiceTests
     {
+        private TestFixture _fixture;
+        public CreateExpenseServiceTests()
+        {
+            _fixture = new TestFixture();
+        }
         [Fact]
         public void CreateExpense_Success()
         {
