@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Moq;
 using expense.Application.ports.outgoing;
 using expense.Domain.Entities;
+using expense.Domain.Enums;
 
 namespace ExpenseTests.Adapters.outgoing
 {
@@ -54,19 +55,20 @@ namespace ExpenseTests.Adapters.outgoing
         }
 
         [Fact]
-        public void ExpenseAddedToDb_Success()
+        public async Task ExpenseAddedToDb_Success()
         {
             //Arrange
-            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 4));
-            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
+            Expense expense = _fixture.Fixture.Create<Expense>();
+
+            var mock = new Mock<IAddExpense>();
+            mock.Setup(foo => foo.Add(ExpenseCategory.HOTEL, 200)).ReturnsAsync(expense);
+            IAddExpense repository = mock.Object;
 
             //Act
-            _fixture.ExpenseDataContext.Expenses.Add(expense);
-            _fixture.ExpenseDataContext.SaveChanges();
+            var response = await repository.Add(ExpenseCategory.HOTEL, 200);
 
             //Assert
-            Assert.Equal(1, _fixture.ExpenseDataContext.Expenses.Count());
-            _fixture.ExpenseDataContext.ChangeTracker.Clear();
+            Assert.IsType<Expense>(response);
         }
 
         [Fact]
