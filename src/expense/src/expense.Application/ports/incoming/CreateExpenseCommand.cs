@@ -1,4 +1,6 @@
-﻿namespace expense.Application.ports.incoming
+﻿using FluentValidation;
+
+namespace expense.Application.ports.incoming
 {
     public class CreateExpenseCommand
     {
@@ -8,6 +10,19 @@
         {
             ExpenseCategory = expenseCategory;
             ExpenseCost = expenseCost;
+        }
+    }
+
+    public class CreateExpenseValidator : AbstractValidator<CreateExpenseCommand>
+    {
+        public CreateExpenseValidator()
+        {
+            RuleFor(x => x.ExpenseCategory)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Please specify a category");
+            RuleFor(x => x.ExpenseCost)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Please specify an expensecost");
         }
     }
 }
