@@ -5,6 +5,7 @@ using expense.Application.services.Shared;
 using System.Threading.Tasks;
 using FluentValidation;
 using System;
+using System.Linq;
 
 namespace expense.Application.services
 {
@@ -24,12 +25,7 @@ namespace expense.Application.services
             var validationResults = await _validator.ValidateAsync(command);
             if (!validationResults.IsValid)
             {
-                string errors = "";
-                foreach (var failure in validationResults.Errors)
-                {
-                    errors += failure.PropertyName + " failed validation with Error: " + failure.ErrorMessage + ". ";
-                }
-                throw new ArgumentException(errors);
+                throw new ArgumentException(validationResults.Errors.First().ToString());
             }
             ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
             await _addExpense.Add(expenseCategory, command.ExpenseCost);
