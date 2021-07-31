@@ -1,8 +1,6 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using expense.Application.ports.incoming;
 using expense.Application.services;
-using Moq;
 using System.Threading.Tasks;
 using Xunit;
 

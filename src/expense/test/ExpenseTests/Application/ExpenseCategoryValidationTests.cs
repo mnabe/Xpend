@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using expense.Application.services.Shared;
 using expense.Domain.Enums;
 using System;

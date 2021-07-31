@@ -1,10 +1,8 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoMoq;
-using expense.Domain.Enums;
 using expense.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 namespace ExpenseTests
 {
