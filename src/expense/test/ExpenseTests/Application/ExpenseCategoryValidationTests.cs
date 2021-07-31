@@ -10,18 +10,16 @@ namespace ExpenseTests.Application
 {
     public class ExpenseCategoryValidationTests
     {
-        private Fixture _fixture;
+        private TestFixture _fixture;
         public ExpenseCategoryValidationTests()
         {
-            _fixture = new Fixture();
+            _fixture = new TestFixture();
         }
         [Fact]
         public void ExpenseCategoryStringIsConvertedToEnum_Success()
         {
             //Arrange
-            //TestFixture _testFixture = new TestFixture();
-            //_fixture.Customize(new AutoMoqCustomization());
-            ExpenseCategoryValidation expenseCategoryValidation = _fixture.Create<ExpenseCategoryValidation>();
+            ExpenseCategoryValidation expenseCategoryValidation = _fixture.Fixture.Create<ExpenseCategoryValidation>();
             string expenseCategoryString = "HOTEL";
 
             //Act
@@ -36,9 +34,7 @@ namespace ExpenseTests.Application
         public void ExpenseCategoryStringIsConvertedToEnum_Fails()
         {
             //Arrange
-            TestFixture _testFixture = new TestFixture();
-            _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            ExpenseCategoryValidation expenseCategoryValidation = _testFixture.Fixture.Create<ExpenseCategoryValidation>();
+            ExpenseCategoryValidation expenseCategoryValidation = _fixture.Fixture.Create<ExpenseCategoryValidation>();
             string expenseCategoryString = "INVALID CATEGORY";
 
             //Act
