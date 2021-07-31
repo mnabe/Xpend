@@ -37,23 +37,20 @@ namespace ExpenseTests.Adapters.outgoing
         }
 
         [Fact]
-        public void GetExpensesFromDb_Success()
+        public async Task GetExpensesFromDb_Success()
         {
             //Arrange
-            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 2));
-            ExpenseEntity expenseOne = _fixture.Fixture.Create<ExpenseEntity>();
-            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 3));
-            ExpenseEntity expenseTwo = _fixture.Fixture.Create<ExpenseEntity>();
-            _fixture.ExpenseDataContext.Expenses.Add(expenseOne);
-            _fixture.ExpenseDataContext.Expenses.Add(expenseTwo);
-            _fixture.ExpenseDataContext.SaveChanges();
+            var expenses = _fixture.Fixture.Create<IEnumerable<Expense>>();
+
+            var mock = new Mock<IFindExpenses>();
+            mock.Setup(foo => foo.Find()).ReturnsAsync(expenses);
+            IFindExpenses repository = mock.Object;
 
             //Act
-            IEnumerable<ExpenseEntity> expenses = _fixture.ExpenseDataContext.Expenses.AsEnumerable();
+            var response = await repository.Find();
 
             //Assert
-            Assert.Equal(2, expenses.Count());
-            _fixture.ExpenseDataContext.ChangeTracker.Clear();
+            Assert.Equal(expenses.Count(), response.Count());
         }
 
         [Fact]
