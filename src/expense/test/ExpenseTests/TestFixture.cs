@@ -21,6 +21,8 @@ namespace ExpenseTests
             ExpenseDataContext = new ExpenseDataContext(_options);
 
             Fixture = new Fixture();
+            Fixture.Customize(new AutoMoqCustomization());
+            Fixture.Customize(new MultipleCustomization());
         }
     }
 }
