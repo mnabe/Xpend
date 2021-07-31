@@ -5,6 +5,7 @@ using expense.Domain.Entities;
 using expense.Persistence;
 using expense.WebApi.Configuration;
 using expense.WebApi.Controllers;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace expense.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(typeof(ExpenseProfile));
+            services.AddScoped<IValidator<CreateExpenseCommand>, CreateExpenseValidator>();
             services.AddResponseCaching();
             services.AddPersistenceDependencies(Configuration);
             services.AddScoped<ICreateExpense, CreateExpenseService>();
