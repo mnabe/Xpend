@@ -19,7 +19,7 @@ namespace expense.Application.services
         public async Task<Expense> EditExpense(EditExpenseCommand command)
         {
             ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
-            var response = await _updateExpense.UpdateExpense(command.ExpenseId, expenseCategory, command.ExpenseCost);
+            var response = await _updateExpense.Update(command.ExpenseId, expenseCategory, command.ExpenseCost);
             return response;
         }
     }
