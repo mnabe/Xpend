@@ -6,6 +6,6 @@ namespace expense.Application.ports.outgoing
 {
     public interface IUpdateExpense
     {
-        public Task<Expense> UpdateExpense(int id, ExpenseCategory expenseCategory, decimal expenseCost);
+        public Task<Expense> Update(int id, ExpenseCategory expenseCategory, decimal expenseCost);
     }
 }
