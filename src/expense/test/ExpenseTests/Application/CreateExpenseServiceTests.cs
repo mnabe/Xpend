@@ -19,13 +19,11 @@ namespace ExpenseTests.Application
         public async Task CreateExpense_Success()
         {
             //Arrange
-            CreateExpenseCommand command = _fixture.Fixture.Create<CreateExpenseCommand>();
-            var mock = new Mock<ICreateExpense>();
-            mock.Setup(foo => foo.CreateExpense(command)).ReturnsAsync(true);
-            ICreateExpense service = mock.Object;
+            CreateExpenseCommand command = _fixture.Fixture.Build<CreateExpenseCommand>().With(c => c.ExpenseCategory, "HOTEL").Create();
+            var createExpenseService = _fixture.Fixture.Build<CreateExpenseService>().OmitAutoProperties().Create();
 
             //Act
-            bool success = await service.CreateExpense(command);
+            bool success = await createExpenseService.CreateExpense(command);
 
             //Assert
             Assert.True(success);
