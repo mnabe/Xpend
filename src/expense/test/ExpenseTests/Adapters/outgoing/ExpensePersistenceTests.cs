@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Xunit;
 using System.Linq;
 using expense.Persistence;
+using System.Threading.Tasks;
+using Moq;
+using expense.Application.ports.outgoing;
+using expense.Domain.Entities;
 
 namespace ExpenseTests.Adapters.outgoing
 {
@@ -14,25 +18,24 @@ namespace ExpenseTests.Adapters.outgoing
             _fixture = new TestFixture();
         }
         [Fact]
-        public void GetExpenseFromDb_Success()
+        public async Task GetExpenseFromDb_Success()
         {
             //Arrange
-            _fixture.Fixture.Customize<ExpenseEntity>(c => c.With(x => x.ExpenseId, 1));
-            ExpenseEntity expense = _fixture.Fixture.Create<ExpenseEntity>();
+            _fixture.Fixture.Customize<Expense>(c => c.With(x => x.ExpenseId, 1));
+            Expense expense = _fixture.Fixture.Create<Expense>();
 
-            //_testFixture.ExpenseDataContext.Expenses.Add(expense);
-            _fixture.ExpenseDataContext.Expenses.Add(expense);
-            _fixture.ExpenseDataContext.SaveChanges();
-            //_testFixture.ExpenseDataContext.SaveChanges();
-            
+            var mock = new Mock<IFindExpense>();
+            mock.Setup(foo => foo.Find(1)).ReturnsAsync(expense);
+            IFindExpense repository = mock.Object;
+
             //Act
-            //ExpenseEntity entity = _testFixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
-            ExpenseEntity entity = _fixture.ExpenseDataContext.Expenses.Where(x => x.ExpenseId == 1).FirstOrDefault();
+            var response = await repository.Find(1);
 
             //Assert
-            Assert.NotNull(entity);
-            Assert.Equal(1, entity.ExpenseId);
+            Assert.NotNull(response);
+            Assert.Equal(1, response.ExpenseId);
         }
+
         [Fact]
         public void GetExpensesFromDb_Success()
         {
