@@ -1,12 +1,11 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using expense.Application.ports.incoming;
 using expense.Domain.Entities;
 using expense.WebApi.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System.Net;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +17,6 @@ namespace ExpenseTests.Adapters.incoming
         public ExpenseControllerTests()
         {
             _fixture = new TestFixture();
-            _fixture.Fixture.Customize(new AutoMoqCustomization());
         }
         [Fact]
         public async Task GetExpense_Success()
@@ -35,12 +33,15 @@ namespace ExpenseTests.Adapters.incoming
             //Assert
             ObjectResult objectResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, objectResult.StatusCode);
-            //result.Should().BeOfType<Task<IActionResult>>();
         }
+
         [Fact]
         public async Task GetExpenses_Success()
         {
             //Arrange
+            var service = _fixture.Fixture.Freeze<Mock<IGetExpenses>>();
+            var expenses = _fixture.Fixture.Create<IEnumerable<Expense>>();
+            service.Setup(a => a.GetExpenses()).ReturnsAsync(expenses);
             var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
 
             //Act
@@ -49,7 +50,6 @@ namespace ExpenseTests.Adapters.incoming
             //Assert
             ObjectResult objectResult = Assert.IsType<OkObjectResult>(result);
             Assert.Equal(200, objectResult.StatusCode);
-            result.Should().BeOfType<Task<IActionResult>>();
         }
 
         [Fact]
@@ -68,22 +68,25 @@ namespace ExpenseTests.Adapters.incoming
         }
 
         [Fact]
-        public void EditExpense_Succes()
+        public async Task EditExpense_Succes()
         {
             //Arrange
-            TestFixture _testFixture = new TestFixture();
-            _testFixture.Fixture.Customize(new AutoMoqCustomization());
-            var expenseController = _testFixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            var service = _fixture.Fixture.Freeze<Mock<IEditExpense>>();
+            var expense = _fixture.Fixture.Build<Expense>().With(c => c.ExpenseId, 1).With(c => c.ExpenseCost, 200).Create();
+            var command = _fixture.Fixture.Build<EditExpenseCommand>().With(c => c.ExpenseCost, 300).Create();
+            service.Setup(a => a.EditExpense(command)).ReturnsAsync(expense);
+            var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
             int expenseId = 1;
             string expenseCategory = "HOTEL";
-            decimal expenseCost = 700;
+            decimal expenseCost = 300;
 
             //Act
-            var result = expenseController.EditExpense(expenseId, expenseCategory, expenseCost);
+            var result = await expenseController.EditExpense(expenseId, expenseCategory, expenseCost);
 
             //Assert
-            result.Should().BeOfType<OkObjectResult>()
-                .Which.StatusCode.Should().Be((int)HttpStatusCode.OK);
+            ObjectResult objectResult = Assert.IsType<OkObjectResult>(result);
+            Assert.Equal(200, objectResult.StatusCode);
+            //Assert.Equal(300, result.)
         }
     }
 }
