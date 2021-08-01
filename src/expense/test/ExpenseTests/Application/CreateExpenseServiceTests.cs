@@ -1,9 +1,6 @@
 ﻿using AutoFixture;
 using expense.Application.ports.incoming;
-using expense.Application.ports.outgoing;
-using expense.Application.services;
 using expense.Domain.Entities;
-using expense.Domain.Enums;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
