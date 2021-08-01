@@ -88,7 +88,7 @@ namespace expense.WebApi.Controllers
                 {
                     return BadRequest(response);
                 }
-                return CreatedAtAction(nameof(GetExpense), response.ToString());
+                return CreatedAtAction(nameof(GetExpense), response);
             }
             catch (Exception e)
             {
