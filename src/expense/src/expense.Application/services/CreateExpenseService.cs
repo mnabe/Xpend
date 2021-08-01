@@ -22,7 +22,7 @@ namespace expense.Application.services
         }
         public async Task<object> CreateExpense(CreateExpenseCommand command)
         {
-            var validationResults = await _validator.ValidateAsync(command);
+            var validationResults = _validator.Validate(command);
             if (!validationResults.IsValid)
             {
                 return validationResults.Errors.First().ToString();
