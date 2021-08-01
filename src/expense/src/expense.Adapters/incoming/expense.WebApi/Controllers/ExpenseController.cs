@@ -76,8 +76,12 @@ namespace expense.WebApi.Controllers
             try
             {
                 CreateExpenseCommand command = new CreateExpenseCommand(expenseCategory, expenseCost);
-                await _createExpense.CreateExpense(command);
-                return CreatedAtAction(nameof(GetExpense), command);
+                var response = await _createExpense.CreateExpense(command);
+                if (response is string)
+                {
+                    return BadRequest(response);
+                }
+                return CreatedAtAction(nameof(GetExpense), response.ToString());
             }
             catch (Exception e)
             {
