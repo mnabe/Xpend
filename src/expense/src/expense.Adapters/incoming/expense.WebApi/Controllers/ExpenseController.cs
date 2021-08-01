@@ -52,6 +52,10 @@ namespace expense.WebApi.Controllers
         }
 
         [ResponseCache(Duration = 60)]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet]
         public async Task<IActionResult> GetExpenses()
         {
@@ -69,7 +73,10 @@ namespace expense.WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
- 
+
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> CreateExpense(string expenseCategory, decimal expenseCost)
         {
@@ -89,6 +96,10 @@ namespace expense.WebApi.Controllers
             }
         }
 
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut(Name = PutExpense)]
         public async Task<IActionResult> EditExpense(int id, string expenseCategory, decimal expenseCost)
         {   
