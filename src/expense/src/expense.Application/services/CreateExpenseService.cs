@@ -4,8 +4,8 @@ using expense.Domain.Enums;
 using expense.Application.services.Shared;
 using System.Threading.Tasks;
 using FluentValidation;
-using System;
 using System.Linq;
+using expense.Domain.Entities;
 
 namespace expense.Application.services
 {
@@ -20,16 +20,16 @@ namespace expense.Application.services
             _validator = validator;
             _expenseCategoryValidation = new ExpenseCategoryValidation();
         }
-        public async Task<bool> CreateExpense(CreateExpenseCommand command)
+        public async Task<object> CreateExpense(CreateExpenseCommand command)
         {
             var validationResults = await _validator.ValidateAsync(command);
             if (!validationResults.IsValid)
             {
-                throw new ArgumentException(validationResults.Errors.First().ToString());
+                return validationResults.Errors.First().ToString();
             }
             ExpenseCategory expenseCategory = _expenseCategoryValidation.checkValidCategoryEnum(command.ExpenseCategory);
-            await _addExpense.Add(expenseCategory, command.ExpenseCost);
-            return true;
+            Expense response = await _addExpense.Add(expenseCategory, command.ExpenseCost);
+            return response;
         }
     }
 }
