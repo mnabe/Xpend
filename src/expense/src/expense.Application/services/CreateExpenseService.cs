@@ -14,7 +14,8 @@ namespace expense.Application.services
         private readonly IAddExpense _addExpense;
         private readonly IValidator<CreateExpenseCommand> _validator;
         private readonly ExpenseCategoryValidation _expenseCategoryValidation;
-        public CreateExpenseService(IAddExpense addExpense, IValidator<CreateExpenseCommand> validator)
+        public CreateExpenseService(IAddExpense addExpense, 
+            IValidator<CreateExpenseCommand> validator)
         {
             _addExpense = addExpense;
             _validator = validator;

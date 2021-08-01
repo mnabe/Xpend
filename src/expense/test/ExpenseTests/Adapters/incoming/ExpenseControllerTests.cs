@@ -23,9 +23,11 @@ namespace ExpenseTests.Adapters.incoming
         {
             //Arrange
             var service = _fixture.Fixture.Freeze<Mock<IGetExpense>>();
-            var expense = _fixture.Fixture.Build<Expense>().With(c => c.ExpenseId, 1).Create();
+            var expense = _fixture.Fixture.Build<Expense>()
+                .With(c => c.ExpenseId, 1).Create();
             service.Setup(a => a.GetExpense(1)).ReturnsAsync(expense);
-            var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            var expenseController = _fixture.Fixture.Build<ExpenseController>()
+                .OmitAutoProperties().Create();
 
             //Act
             var result = await expenseController.GetExpense(1);
@@ -42,7 +44,8 @@ namespace ExpenseTests.Adapters.incoming
             var service = _fixture.Fixture.Freeze<Mock<IGetExpenses>>();
             var expenses = _fixture.Fixture.Create<IEnumerable<Expense>>();
             service.Setup(a => a.GetExpenses()).ReturnsAsync(expenses);
-            var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            var expenseController = _fixture.Fixture.Build<ExpenseController>()
+                .OmitAutoProperties().Create();
 
             //Act
             var result = await expenseController.GetExpenses();
@@ -56,7 +59,8 @@ namespace ExpenseTests.Adapters.incoming
         public async Task CreateExpense_Success()
         {
             //Arrange
-            var expenseController = _fixture.Fixture.Build<ExpenseController>().OmitAutoProperties().Create();
+            var expenseController = _fixture.Fixture.Build<ExpenseController>()
+                .OmitAutoProperties().Create();
             string expenseCategory = "HOTEL";
             decimal expenseCost = 700;
 

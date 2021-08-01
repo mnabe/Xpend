@@ -20,7 +20,8 @@ namespace expense.WebApi.Controllers
         private readonly IGetExpenses _getExpenses;
         private readonly IGetExpense _getExpense;
         private readonly IEditExpense _editExpense;
-        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses, IGetExpense getExpense, IEditExpense editExpense)
+        public ExpenseController(ICreateExpense createExpense, IGetExpenses getExpenses, 
+            IGetExpense getExpense, IEditExpense editExpense)
         {
             _createExpense = createExpense;
             _getExpenses = getExpenses;
