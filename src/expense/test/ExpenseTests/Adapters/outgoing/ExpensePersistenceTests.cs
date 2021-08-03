@@ -21,8 +21,7 @@ namespace ExpenseTests.Adapters.outgoing
         public async Task GetExpenseFromDb_Success()
         {
             //Arrange
-            _fixture.Fixture.Customize<Expense>(c => c.With(x => x.ExpenseId, 1));
-            Expense expense = _fixture.Fixture.Create<Expense>();
+            var expense = _fixture.Fixture.Build<Expense>().With(c => c.ExpenseId, 1).Create();
 
             var mock = new Mock<IFindExpense>();
             mock.Setup(foo => foo.Find(1)).ReturnsAsync(expense);
@@ -57,7 +56,7 @@ namespace ExpenseTests.Adapters.outgoing
         public async Task ExpenseAddedToDb_Success()
         {
             //Arrange
-            Expense expense = _fixture.Fixture.Create<Expense>();
+            var expense = _fixture.Fixture.Create<Expense>();
 
             var mock = new Mock<IAddExpense>();
             mock.Setup(foo => foo.Add(ExpenseCategory.HOTEL, 200)).ReturnsAsync(expense);
