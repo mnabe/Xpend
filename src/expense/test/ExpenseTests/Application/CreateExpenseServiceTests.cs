@@ -23,7 +23,7 @@ namespace ExpenseTests.Application
             var expense = _fixture.Fixture.Create<Expense>();
             CreateExpenseCommand command = _fixture.Fixture.Build<CreateExpenseCommand>()
                 .With(c => c.ExpenseCategory, "HOTEL").Create();
-            var validationResults = _fixture.Fixture.Build<ValidationResult>().Create();
+            var validationResults = _fixture.Fixture.Create<ValidationResult>();
 
             var addMock = new Mock<ICreateExpense>();
             addMock.Setup(x => x.CreateExpense(command)).ReturnsAsync(expense);
